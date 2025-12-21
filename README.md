@@ -125,4 +125,6 @@ These skills are directly transferable to a **SOC Analyst** role, where speed, a
 ---
 
 ### Resources and Documentation
-to add..
+To review the full build process and configuration details
+
+* **Complete Process Screenshots:** [Full Screenshot Process](./Full-Screenshot-Process)
