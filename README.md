@@ -44,7 +44,7 @@ This project focused on:
 
 **Utilities:**
 * **Draw.io:** Workflow Diagramming.
-* **SquareX:** Disposable Email for testing alerts.
+* **Proton Mail:** Disposable Email for testing alerts.
 
 ---
 
