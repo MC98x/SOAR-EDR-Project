@@ -74,7 +74,30 @@ Implemented a seamless response workflow. Instead of manually logging into the E
 ---
 
 ### Screenshots
-*(I will add later when i finish building the project)*
+
+#### 1. Detection Engineering (The Rule)
+*Here, I configured a custom Detection & Response (D&R) rule within LimaCharlie. This rule monitors for the specific process `lazagne.exe` in the File Path or Command Line. This granular rule ensures that even if the attacker renames the file but keeps the original internal name or argument structure, the activity is still detected.*
+![LimaCharlie DR Rule](1-Detection-Engineering-The-Rule.png)
+
+#### 2. Multi-Channel Alerting (Slack & Email)
+*Upon detection, the Tines storyboard broadcasts the alert to multiple channels to ensure immediate visibility. The screenshots below show the formatted Slack message and the corresponding email notification containing the context (Time, User, IP) needed for immediate triage.*
+![Slack Alert](2.1-Multi-Channel-Alerting-Slack-&-Email.png)
+![Email Alert](2.2-Multi-Channel-Alerting-Slack-&-Email.png)
+
+#### 3. The Playbook (Tines Workflow)
+*This is the backend logic built in Tines. It accepts the JSON alert from LimaCharlie, formats the data, sends the notifications to Slack and Email, and then creates a "User Prompt" decision block to wait for analyst authorization before taking action.*
+![Tines Storyboard](3-The-Playbook-Tines-Workflow.png)
+
+#### 4. Human-in-the-Loop Response (User Prompt)
+*Instead of blindly isolating the machine (which could disrupt business operations), I implemented a decision step. The analyst receives a link to this page to review the details and simply select "Yes" to authorize the isolation.*
+![Tines User Prompt](4.1-Human-in-the-Loop-Response-User-Prompt.png)
+
+#### 5. Response Confirmation (Isolation & Slack Update)
+*Once authorized, Tines triggers the LimaCharlie API to isolate the host. 
+**Image A:** Confirms the sensor status has changed to "Isolated" (highlighted in red).
+**Image B:** Shows the final confirmation sent back to Slack. Note the timestamps: The alert arrived at **8:55 PM** and was contained by **8:56 PM**, demonstrating a **1-minute Mean Time to Respond (MTTR)**.*
+![LimaCharlie Isolation Status](5.1-Response-Confirmation-Isolation-&-Slack-Update.png)
+![Slack Isolation Confirmation](5.2-Response-Confirmation-Isolation-&-Slack-Update.png)
 
 ---
 
