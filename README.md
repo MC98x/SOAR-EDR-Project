@@ -81,8 +81,8 @@ Implemented a seamless response workflow. Instead of manually logging into the E
 
 #### 2. Multi-Channel Alerting (Slack & Email)
 *Upon detection, the Tines storyboard broadcasts the alert to multiple channels to ensure immediate visibility. The screenshots below show the formatted Slack message and the corresponding email notification containing the context (Time, User, IP) needed for immediate triage.*
-![Slack Alert](Key-Screenshots/2.1-Multi-Channel-Alerting-Slack-&-Email.png)
-![Email Alert](Key-Screenshots/2.2-Multi-Channel-Alerting-Slack-&-Email.png)
+![Slack Alert](Key-Screenshots/2.1-Multi-Channel-Alerting-Slack-&-Email-V2.png)
+![Email Alert](Key-Screenshots/2.2-Multi-Channel-Alerting-Slack-&-Email-V2.png)
 
 #### 3. The Playbook (Tines Workflow)
 *This is the backend logic built in Tines. It accepts the JSON alert from LimaCharlie, formats the data, sends the notifications to Slack and Email, and then creates a "User Prompt" decision block to wait for analyst authorization before taking action.*
@@ -90,7 +90,8 @@ Implemented a seamless response workflow. Instead of manually logging into the E
 
 #### 4. Human-in-the-Loop Response (User Prompt)
 *Instead of blindly isolating the machine (which could disrupt business operations), I implemented a decision step. The analyst receives a link to this page to review the details and simply select "Yes" to authorize the isolation.*
-![Tines User Prompt](Key-Screenshots/4.1-Human-in-the-Loop-Response-User-Prompt.png)
+![Tines User Prompt](Key-Screenshots/4.1-Human-in-the-Loop-Response-User-Prompt-V2.png)
+![Tines User Prompt-2](Key-Screenshots/4.1-Human-in-the-Loop-Response-User-Prompt-V2.png)
 
 #### 5. Response Confirmation (Isolation & Slack Update)
 *Once authorized, Tines triggers the LimaCharlie API to isolate the host. 
