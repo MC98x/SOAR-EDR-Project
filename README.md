@@ -49,7 +49,10 @@ This project focused on:
 ---
 
 ### Network Diagram
-*(I will create and add one later)*
+
+*The following diagram illustrates the logical flow of the SOAR pipeline: from the initial detection of a hacktool on the infected endpoint to the automated distribution of alerts and the final execution of isolation commands based on analyst input.*
+
+![Logical Workflow Diagram](Key-Screenshots/SOAR-EDR-Project.png)
 
 ---
 
@@ -76,27 +79,25 @@ Implemented a seamless response workflow. Instead of manually logging into the E
 ### Screenshots
 
 #### 1. Detection Engineering (The Rule)
-*Here, I configured a custom Detection & Response (D&R) rule within LimaCharlie. This rule monitors for the specific process `lazagne.exe` in the File Path or Command Line. This granular rule ensures that even if the attacker renames the file but keeps the original internal name or argument structure, the activity is still detected.*
+*I configured a custom Detection & Response (D&R) rule within LimaCharlie. As shown, the rule is designed to flag activity based on the File Path, Command Line arguments, or the specific SHA256 hash associated with the LaZagne hacktool. This multi-layered approach ensures detection even if the file is renamed.*
 ![LimaCharlie DR Rule](Key-Screenshots/1-Detection-Engineering-The-Rule.png)
 
 #### 2. Multi-Channel Alerting (Slack & Email)
-*Upon detection, the Tines storyboard broadcasts the alert to multiple channels to ensure immediate visibility. The screenshots below show the formatted Slack message and the corresponding email notification containing the context (Time, User, IP) needed for immediate triage.*
+*Speed is critical in a SOC. The Tines playbook immediately broadcasts the detection to both Slack and Email. These alerts contain high-context metadata—including the Sensor ID and a direct link to the LimaCharlie timeline—enabling the analyst to begin triage instantly.*
 ![Slack Alert](Key-Screenshots/2.1-Multi-Channel-Alerting-Slack-&-Email-V2.png)
 ![Email Alert](Key-Screenshots/2.2-Multi-Channel-Alerting-Slack-&-Email-V2.png)
 
 #### 3. The Playbook (Tines Workflow)
-*This is the backend logic built in Tines. It accepts the JSON alert from LimaCharlie, formats the data, sends the notifications to Slack and Email, and then creates a "User Prompt" decision block to wait for analyst authorization before taking action.*
+*This is the logic engine behind the project. The Tines storyboard handles the ingestion of the EDR webhook and executes the branching logic: alerting, waiting for a user decision, and then executing the response or notifying the team of a 'No' decision.*
 ![Tines Storyboard](Key-Screenshots/3-The-Playbook-Tines-Workflow.png)
 
 #### 4. Human-in-the-Loop Response (User Prompt)
-*Instead of blindly isolating the machine (which could disrupt business operations), I implemented a decision step. The analyst receives a link to this page to review the details and simply select "Yes" to authorize the isolation.*
+*To prevent accidental disruption of business operations, the playbook pauses for analyst authorization. I created a dedicated prompt page where the analyst can review the telemetry one last time before committing to host isolation.*
 ![Tines User Prompt](Key-Screenshots/4.1-Human-in-the-Loop-Response-User-Prompt-V3.png)
 ![Tines User Prompt After Submitting "Yes"](Key-Screenshots/4.2-Human-in-the-Loop-Response-User-Prompt-V3.png)
 
 #### 5. Response Confirmation (Isolation & Slack Update)
-*Once authorized, Tines triggers the LimaCharlie API to isolate the host. 
-**Image A:** Confirms the sensor status has changed to "Isolated" (highlighted in red).
-**Image B:** Shows the final confirmation sent back to Slack. Note the timestamps: The alert arrived at **8:55 PM** and was contained by **8:56 PM**, demonstrating a **1-minute Mean Time to Respond (MTTR)**.*
+*Once 'Yes' is selected, the LimaCharlie sensor is moved into an isolated state (as seen in the Network Access status). To close the loop, Tines sends a final confirmation back to Slack. In this simulation, the time from detection (8:55 PM) to isolation (8:56 PM) was only **one minute**.*
 ![LimaCharlie Isolation Status](Key-Screenshots/5.1-Response-Confirmation-Isolation-&-Slack-Update.png)
 ![Slack Isolation Confirmation](Key-Screenshots/5.2-Response-Confirmation-Isolation-&-Slack-Update.png)
 
