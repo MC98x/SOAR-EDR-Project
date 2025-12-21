@@ -91,7 +91,7 @@ Implemented a seamless response workflow. Instead of manually logging into the E
 #### 4. Human-in-the-Loop Response (User Prompt)
 *Instead of blindly isolating the machine (which could disrupt business operations), I implemented a decision step. The analyst receives a link to this page to review the details and simply select "Yes" to authorize the isolation.*
 ![Tines User Prompt](Key-Screenshots/4.1-Human-in-the-Loop-Response-User-Prompt-V3.png)
-![Tines User Prompt-2](Key-Screenshots/4.2-Human-in-the-Loop-Response-User-Prompt-V3.png)
+![Tines User Prompt After Submitting "Yes"](Key-Screenshots/4.2-Human-in-the-Loop-Response-User-Prompt-V3.png)
 
 #### 5. Response Confirmation (Isolation & Slack Update)
 *Once authorized, Tines triggers the LimaCharlie API to isolate the host. 
