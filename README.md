@@ -50,3 +50,6 @@
 - Add a **false-positive guardrail** (signed binary / allowlisted admin paths)
 - Auto-create a **case/ticket** on approval (TheHive/Jira) for an audit trail
 - Expand response actions (kill process / collect triage artifacts / system info)
+
+## Resources
+- **Complete Process Screenshots:** [Full Screenshot Process](./Full-Screenshot-Process)
